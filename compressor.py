@@ -4,21 +4,16 @@
 
 def PackBits(string):
 
-    #Define variables
+    original_text = string
 
-    #Result variable
     compressed_text = ''
 
-    #Processing variables
-    original_text = string
-    decom_char    = ''
-    current_char  = original_text[0]
-
-    #Counter variables
+    current_char = original_text[0]
     countup = 0
-    decom   = 0
+    decom =0
+    decom_char = ''
 
-#Main process of PackBits Compression
+
     for character in original_text:
         if current_char == character:
             if decom < 0:
@@ -35,14 +30,12 @@ def PackBits(string):
             countup=1
             current_char = character
 
-#Prcessing for last character in the string.
     if countup > 1:
         compressed_text +=  str(countup)+str(current_char)
     else:
         decom -= 1
         decom_char += current_char
-        compressed_text +=  str(decom+1)+str(decom_char)
-
+        compressed_text +=  str(decom)+str(decom_char)
     return compressed_text
 
 #Decompressor for Compressed Data(PackBits)
@@ -73,11 +66,11 @@ def PackBits_Decompressor(string):
     return decompressed_text
 
 #FUNCTION SAMPLE
-original     = "AAAAXXXXBBBBXXXX"
+original     = "ODAMURA"
 com_result   = PackBits(original)
 decom_result = PackBits_Decompressor(com_result)
 
 #OUTPUTS
 print("Original Data     : ",format(original))
-print("Compressed Data   : ",format(result))
-print("Decompressed Data : ",format(result_de))
+print("Compressed Data   : ",format(com_result))
+print("Decompressed Data : ",format(decom_result))
